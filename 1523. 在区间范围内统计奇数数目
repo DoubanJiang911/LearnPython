@@ -1,0 +1,12 @@
+class Solution:
+    def countOdds(self, low: int, high: int) -> int:
+        #情况1.开始和结束都是奇数
+        if low%2==1 and high%2==1:
+            ans=(high-low)/2+1
+        #情况2.开始和结束都是偶数
+        elif low%2==0 and high%2==0:
+            ans=(high-low)/2
+        #情况3.开始和结束一个是奇数一个是偶数
+        else:
+            ans=(high-low+1)/2
+        return int(ans)
