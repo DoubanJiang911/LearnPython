@@ -1,0 +1,15 @@
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        min,max=0,x
+        if max==2:
+            return 1
+        while max-min>1:
+            n=(max+min)//2
+            if x/n<n:
+                max=n
+            else:
+                min=n
+        if x==max:
+            return max
+        else:
+            return min
