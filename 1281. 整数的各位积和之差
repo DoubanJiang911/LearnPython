@@ -1,0 +1,15 @@
+class Solution:
+    def subtractProductAndSum(self, n: int) -> int:
+        #num_list存储n的每个个位数
+        num_list=[]
+        while n:            
+            temp=n%10
+            num_list.append(temp)
+            n//=10
+        #product存储个位数的乘积，sumtotal存储个位数的总和
+        product=1
+        for i in num_list:
+            product*=i
+        sumtotal=sum(num_list)
+        res=product-sumtotal
+        return res
