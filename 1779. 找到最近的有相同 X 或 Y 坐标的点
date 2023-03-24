@@ -1,0 +1,18 @@
+class Solution:
+    def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
+        #题目设置points值最大为10的四次方，因此初始min为最大值
+        res=-1
+        min=10000
+        for pos, point in enumerate(points):
+            #如果找到x,y都相同的点则直接返回下标
+            if point[0]==x and point[1]==y:
+                return pos
+            #否则就记录第一个距离最短的点对应下标
+            elif point[0]==x or point[1]==y:
+                temp=abs(x-point[0])+abs(y-point[1])
+                if temp<min:
+                    min=temp
+                    res=pos
+            else:
+                continue
+        return res
