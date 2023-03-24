@@ -1,0 +1,11 @@
+class Solution:
+    def convertTemperature(self, celsius: float) -> List[float]:
+        kelvin = celsius + 273.15
+        fahrenheit = celsius * 1.80 + 32.00
+        #将计算结果统一设置格式为小数点后5位数
+        kelvin = '{0:.5f}'.format(kelvin)
+        fahrenheit = '{0:.5f}'.format(fahrenheit)
+        #将str类型变为float类型
+        kelvin = float(kelvin)
+        fahrenheit = float(fahrenheit)
+        return [kelvin, fahrenheit]
