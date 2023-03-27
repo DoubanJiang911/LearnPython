@@ -1,0 +1,19 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        #temp记录nums2中的每一个元素对应的’下一个更大的数字‘
+        temp = nums2.copy()
+        for i in range(0, len(temp)):
+            #flag用于判断是否发现更大的数值
+            flag = False
+            for j in range(i+1, len(temp)):
+                if temp[i] < temp[j]:
+                    temp[i] = temp[j]
+                    flag = True
+                    break
+            if flag is False:
+                temp[i] = -1
+        for x in range(0, len(nums1)):
+            #在nums1在nums2中的下标后，返回temp中对应下标的数值
+            pos = nums2.index(nums1[x])
+            nums1[x] = temp[pos]
+        return nums1
