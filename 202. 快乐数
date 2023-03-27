@@ -1,0 +1,22 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        #根据题意一直循环，直到得出数字==1则返回True，循环到了之前重复过的数字则返回False
+        var = 1
+        unique = []
+        while var:
+            if n in unique:
+                return False
+            else:
+                unique.append(n)
+                nums = []
+                while n:
+                    temp = n % 10
+                    nums.append(temp)
+                    n //= 10
+                sum = 0
+                for i in nums:
+                    sum += i * i
+                if sum == 1:
+                    return True
+                else:
+                    n = sum
