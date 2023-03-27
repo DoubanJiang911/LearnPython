@@ -1,0 +1,24 @@
+class Solution:
+    def areAlmostEqual(self, s1: str, s2: str) -> bool:
+        #返回True的场景：s1和s2完全相同，s1和s2有两处字符相同但位置相反
+        #temp记录s1和s2不一致的次数，ta/tb/tc/td分别记录两次不一致的字符
+        temp = 0
+        for i in range(0,len(s1)):
+            if s1[i] != s2[i]:
+                temp += 1
+                if temp == 1:
+                    ta = s1[i]
+                    tb = s2[i]
+                elif temp == 2:
+                    tc = s1[i]
+                    td = s2[i]
+                else:
+                    return False
+        if temp == 0:
+            return True
+        elif temp == 1:
+            return False
+        elif ta == td and tb == tc:
+            return True
+        else:
+            return False
