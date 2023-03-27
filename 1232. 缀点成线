@@ -1,0 +1,11 @@
+class Solution:
+    def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+        x = coordinates[1][0] - coordinates[0][0]
+        y = coordinates[1][1] - coordinates[0][1]
+        for i in range(2, len(coordinates)):
+            temp_x = coordinates[i][0] - coordinates[i-1][0]
+            temp_y = coordinates[i][1] - coordinates[i-1][1]
+            #从temp_x/x != temp_y/y转变，避免分母为0的情况
+            if temp_x * y != temp_y * x:
+                return False
+        return True
