@@ -1,0 +1,17 @@
+class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        """
+        left:起始下标，right：结束下标，n：起始结束间的间隔差值，sums：总和
+        第一层循环：以当前n的间隔遍历完全部的子数组，每一轮循环间隔+2
+        第二层循环：从起始到结束，计算每个子数组的总和，每一轮循环起始和结束右移
+        第三层循环：计算单个子数组的总和
+        """
+        n, sums = 0, 0
+        while n < len(arr):
+            left, right = 0, n + 1
+            while right <= len(arr):
+                for i in range(left, right):
+                    sums += arr[i]
+                left, right = left + 1, right + 1
+            n += 2
+        return sums
