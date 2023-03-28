@@ -1,0 +1,19 @@
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        if r * c != len(mat) * len(mat[0]):
+            return mat
+        temp = sum(mat, [])
+        ans = [[0] * c for _ in range(r)]
+        count, i, j = 0, 0, 0
+        while count < len(temp):
+            ans[i][j] = temp[count]
+            count += 1
+            j += 1
+            if j == c:
+                j = 0
+                i += 1
+        return ans
+"""
+1.如果原数组的行列乘积和要求转换的行列乘积不一致，则可以直接判断为无法重塑，直接返回原数组
+2.将原数组转为一维数组，之后遍历以要求的行列写入新数组
+"""
