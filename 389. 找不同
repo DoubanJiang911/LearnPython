@@ -1,0 +1,12 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        #将str类型转为list后，即可调用sort函数排序
+        a = list(s)
+        b = list(t)
+        a.sort()
+        b.sort()
+        for i in range(len(a)):
+            if a[i] != b[i]:
+                return b[i]
+        return b[-1]
+    
