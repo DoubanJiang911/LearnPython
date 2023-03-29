@@ -1,0 +1,37 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        """
+        #nums = nums[-k:] + nums[:len(nums)-k]
+        """        
+        nums.reverse()
+        nums[0, k].reverse()
+        nums[k, len(nums)].reverse()
+        """
+        """
+        k %= len(nums)
+        nums[:] = nums[-k:] + nums[:-k]
+        """
+        k %= len(nums)
+        left, right = 0, len(nums) - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+        left, right = 0, k - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+        left, right = k, len(nums) - 1
+        while left < right:
+            nums[left], nums[right] = nums[right], nums[left]
+            left += 1
+            right -= 1
+        """
+        1.反转整个列表
+        2.反转[0:k]
+        3.反转[k:]
+        *.k %= len(nums)：避免k > len(nums)时下标超出列表范围
+        """
