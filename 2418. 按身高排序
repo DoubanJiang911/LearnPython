@@ -1,0 +1,10 @@
+class Solution:
+    def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
+        temp = heights.copy()
+        temp.sort()
+        ans = []
+        while len(temp):
+            p = temp.pop()
+            v = heights.index(p)
+            ans.append(names[v])
+        return ans
