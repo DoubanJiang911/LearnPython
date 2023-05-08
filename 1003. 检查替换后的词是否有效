@@ -1,0 +1,16 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        temp = s
+        flag = 1
+        while len(temp) and flag:
+            flag = 0
+            for i in range(len(temp)-2):
+                if temp[i] == 'a' and temp[i+1] == 'b' and temp[i+2] == 'c':
+                    temp = temp[:i] + temp[i+3:]
+                    flag = 1
+                    break
+        if len(temp) == 0:
+            return True
+        else:
+            return False
+        
