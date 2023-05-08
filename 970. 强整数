@@ -1,0 +1,32 @@
+class Solution:
+    def powerfulIntegers(self, x: int, y: int, bound: int) -> List[int]:
+        sums = 2
+        ans = []
+        if bound <= 1:
+            return []
+        elif x == 1 and y ==1:
+            return [2]
+        elif x == 1 or y == 1:
+            i = 1
+            while sums <= bound:
+                ans.append(sums)
+                sums = x**i + y**i
+                i += 1
+            ans = list(set(ans))
+            return ans
+        else:
+            i, j = 0, 0
+            while x**i < bound:
+                # print('x=', x**i, end='|')
+                while sums <= bound:
+                    # print('y=', y**j, end='|')
+                    # print('sums=', sums, end='|')
+                    ans.append(sums)
+                    sums = x**i + y**j
+                    j += 1
+                sums = 2
+                j = 0
+                i += 1
+                # print('\n')
+            ans = list(set(ans))
+            return ans
