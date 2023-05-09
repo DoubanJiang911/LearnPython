@@ -1,0 +1,11 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        dic = set(nums)
+        var = nums[0]
+        ans = 0
+        for i in dic:
+            c = nums.count(i)
+            if c > ans:
+                var = i
+                ans = c
+        return var
