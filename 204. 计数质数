@@ -1,0 +1,48 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        else:
+            pre = [1] * n
+            for i in range(2, n):
+                if pre[i] == 1:
+                    c = 2
+                    while c * i < n:
+                        pre[c*i] = 0
+                        c += 1
+        return sum(pre[2:])
+
+
+'''
+原方案，超时
+from math import sqrt
+
+
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        if n <= 2:
+            return 0
+        else:
+            pre = ['false'] * n
+            ans = 0
+            for i in range(2, n):
+                if i % 2 == 0:
+                    continue
+                elif pre[i] == 'pass':
+                    continue
+                elif isprime(i):
+                    ans += 1
+                    c = 3
+                    while c * i < n:
+                        pre[c*i] = 'pass'
+                        c += 2
+        return ans+1
+
+
+def isprime(n):
+    for i in range(2, int(sqrt(n))+1):
+        if n % i == 0:
+            return False
+    return True
+
+'''
