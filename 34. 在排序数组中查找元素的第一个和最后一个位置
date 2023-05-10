@@ -1,0 +1,8 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        try:
+            a = nums.index(target)
+        except ValueError:
+            return [-1, -1]
+        b = nums.count(target) - 1 + a
+        return [a, b]
