@@ -1,0 +1,18 @@
+class Solution:
+    def gcdOfStrings(self, str1: str, str2: str) -> str:
+        if str1 + str2 != str2 + str1:
+            return ''
+        c = gcd(len(str1), len(str2))
+        return str1[:c]
+
+
+def gcd(a, b):
+    while a != 0:
+        a, b = b % a, a
+    return b
+
+
+'''
+1.gcd，辗转相除法（欧几里得算法），取得两个非负整数的最大公约数
+2.如存在字符串x可以整除两个str,则两个str的前缀必须相同，那么两个str无论前后顺序合并，都是拼接成一条相同的字符串
+'''
