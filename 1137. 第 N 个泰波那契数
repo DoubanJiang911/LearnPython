@@ -1,0 +1,9 @@
+class Solution:
+    def tribonacci(self, n: int) -> int:
+        tri = [0, 1, 1]
+        if n <= 2:
+            return tri[n]
+        for i in range(3, n + 1):
+            tri.append(tri[i-3]+tri[i-2]+tri[i-1])
+        return tri[-1]
+    
