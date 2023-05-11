@@ -1,0 +1,7 @@
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        for i in range(2, len(cost)):
+            cost[i] += min(cost[i-1], cost[i-2])
+        return min(cost[-1], cost[-2])
+    # 到达第i级台阶的阶梯顶部的最小花费等于踏上第i级台阶的最小花费与踏上第i-1级台阶的最小花费的最小值
+    
