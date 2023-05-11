@@ -1,0 +1,18 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        m = len(triangle)
+        n = 1
+        if m == 1:
+            return triangle[0][0]
+        for i in range(1, m):
+            n += 1
+            for j in range(0, n):
+                if j == 0:
+                    triangle[i][j] += triangle[i-1][j]
+                elif j == n - 1:
+                    triangle[i][j] += triangle[i-1][j-1]
+                elif 0 < j < n - 1:
+                    triangle[i][j] += min(triangle[i-1][j-1], triangle[i-1][j])
+        # print(triangle)
+        return min(triangle[m - 1])
+# 计算边界值的时候只能合并上一层的边界值，非边界值的位置可选上一层两个相邻位置中较小的数值进行合并
