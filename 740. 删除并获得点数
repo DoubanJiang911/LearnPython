@@ -1,0 +1,15 @@
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 1:
+            return nums[0]
+        all = []
+        m = max(nums)
+        for i in range(0, m+1):
+            all.append(nums.count(i)*i)
+            # all数组存储每个数字出现的次数 * 相应数值
+        first = 0
+        second = all[1]
+        for x in range(2, len(all)):
+            first, second = second, max(all[x]+first, second)
+        return second
