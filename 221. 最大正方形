@@ -1,0 +1,30 @@
+class Solution:
+    def maximalSquare(self, matrix: List[List[str]]) -> int:
+        m = len(matrix)
+        n = len(matrix[0])
+        dp = [[0 for _ in range(n)] for _ in range(m)]
+        maxside = 0
+        for i in range(0, m):
+            for j in range(0, n):
+                if matrix[i][j] == '1':
+                    if i == 0 or j == 0:
+                        dp[i][j] = 1
+                    else:
+                        dp[i][j] = min(dp[i - 1][j], dp[i - 1][j - 1], dp[i][j - 1]) + 1
+                    if dp[i][j] > maxside:
+                        maxside = dp[i][j]
+        return maxside * maxside
+
+
+"""
+dp = [[0] * n] * m,以此方式初始化后，当写dp[0][0]=1时，dp[1][0]也会自动变1
+原因：定义的时候dp的m行是同一个[0]*n的索引，所以一个被改变，其他的都被改变
+需要改为
+dp = [[0 for _ in range(n)]  for _ in range(m)]
+或者
+import copy
+dp = []
+a = [0]*n
+for i in range(m):
+	dp.append(copy.deepcopy(a))
+"""
