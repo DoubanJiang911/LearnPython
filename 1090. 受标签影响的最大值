@@ -1,0 +1,31 @@
+class Solution:
+    def largestValsFromLabels(self, values: List[int], labels: List[int], numWanted: int, useLimit: int) -> int:
+        mylist = list(zip(labels, values))
+        mylist = sorted(mylist, key=lambda x: -x[1])
+        print(mylist)
+        cnt = 0
+        ans = 0
+        i = 0
+        flag = [0] * (max(mylist)[0] + 1)
+        while cnt < numWanted and i < len(mylist):
+            if flag[mylist[i][0]] < useLimit:
+                ans += mylist[i][1]
+                cnt += 1
+                flag[mylist[i][0]] += 1
+            i += 1
+        return ans
+
+
+"""
+cnt--计数，已经写入ans的次数
+ans--总和，计算最大数值的和
+i--记录下标，遍历values的每个值
+flag--哈希表，对应每个labels已经记录的次数
+"""
+"""
+sorted_arr = sorted(arr, key=lambda x: x[n]),按照每个子数组的第n个元素排序
+如果想要按照多个条件进行排序，可以使用一个元组作为排序关键字，例如按照每个子数组的第一个元素升序排序，如果第一个元素相同则按照第二个元素降序排序：
+sorted_arr = sorted(arr, key=lambda x: (x[0], -x[1]))
+**在第二个关键字前面添加一个负号，可以使其按照降序排序。
+**需要注意的是，sorted函数将返回一个新的已排序的列表，原始的二维数组不会被修改。如果您需要在原始数组上进行排序，可以使用sort方法
+"""
