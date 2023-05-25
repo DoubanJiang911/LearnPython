@@ -1,0 +1,60 @@
+from collections import defaultdict
+
+
+class Solution:
+    def oddString(self, words: List[str]) -> str:
+        # defaultdict，作用是当key不存在时，返回的是函数的默认值，比如list对应[ ]，str对应的是空字符串，set对应set( )，int对应0
+        dd = defaultdict(list)
+        for wd in words:
+            # zip(wd, wd[1:])，将words[i]的两个相邻字符组合成[words[0],words[1]]的形式
+            # []嵌套for循环，直接将words[i]转换成等差数组，如words[i]=adc，则k=[3,-1]
+            k = [ord(c[1])-ord(c[0]) for c in zip(wd, wd[1:])]
+            # unhashable type: list
+            # hashable type: tuple
+            dd[tuple(k)] += [wd]
+            # print(dd)
+            """
+            运用哈希，将k记录的等差数组作为KEY，对应的words[i]作为value，如果遇到相同的等差数组则归纳到一起，最终形成相同等差的n个words[i]
+            和1个不同于其他等差的words[i]
+            print(dd)循环过程如下所示：
+            defaultdict(<class 'list'>, {(3, -1): ['adc']})
+            defaultdict(<class 'list'>, {(3, -1): ['adc', 'wzy']})
+            defaultdict(<class 'list'>, {(3, -1): ['adc', 'wzy'], (1, 1): ['abc']})
+            """
+        x1, x2 = dd.values()
+        return x1[0] if len(x1) == 1 else x2[0]
+
+
+"""
+class Solution:
+    def oddString(self, words: List[str]) -> str:
+        letter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                  'u', 'v', 'w', 'x', 'y', 'z']
+        l = len(words)
+        n = len(words[0])
+        hashtable = []
+        past = []
+        for i in range(l):
+            j = 1
+            a = letter.index(words[i][j]) - letter.index(words[i][j-1])
+            b = letter.index(words[i][j+1]) - letter.index(words[i][j])
+            temp = [a, b]
+            hashtable.append(temp)
+            if temp not in past:
+                past.append(temp)
+        if hashtable.count(past[0]) == 1:
+            pos = hashtable.index(past[0])
+        else:
+            pos = hashtable.index(past[1])
+        return words[pos]
+
+
+执行报错，8 / 39 个通过测试用例
+等差字符串不一定是每个相邻字符存在等差关系
+["nnnmmmnnmmmmmmmmmmnm","iiihhhiihhhhhhhhhhih","aaaabbbbbbaaabaaaabb","qqqpppqqppppppppppqp","eeedddeedddddddddded",
+"eeedddeedddddddddded","iiihhhiihhhhhhhhhhih","lllkkkllkkkkkkkkkklk","sssrrrssrrrrrrrrrrsr","sssrrrssrrrrrrrrrrsr",
+"jjjiiijjiiiiiiiiiiji","nnnmmmnnmmmmmmmmmmnm","xxxwwwxxwwwwwwwwwwxw","eeedddeedddddddddded","zzzyyyzzyyyyyyyyyyzy",
+"wwwvvvwwvvvvvvvvvvwv","cccbbbccbbbbbbbbbbcb","xxxwwwxxwwwwwwwwwwxw","cccbbbccbbbbbbbbbbcb","yyyxxxyyxxxxxxxxxxyx",
+"hhhggghhgggggggggghg"]
+
+"""
