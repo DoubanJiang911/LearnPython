@@ -1,0 +1,81 @@
+class Solution:
+    def sampleStats(self, count: List[int]) -> List[float]:
+        lc = len(count)
+        minimum = -1
+        m = 0
+        sums = 0
+        n = 0
+        for c in range(lc):
+            if count[c] == 0:
+                continue
+            else:
+                n += count[c]
+                # n记录不为0的元素总数，用于计算平均值mean
+                maximum = round(c, 5)
+                # 最大值maximum需记录最后一次捕获的数值，对应count中最后一个不是0的下标元素
+                sums += count[c] * c
+                # sums记录不为0的元素总数*元素数值的总和，用于计算平均值mean
+                if minimum == -1:
+                    minimum = round(c, 5)
+                    # 最小值minimum仅需捕获一次，对应count中第一个不是0的下标元素
+                if count[c] > m:
+                    m = count[c]
+                    mode = round(c, 5)
+                    # m记录每个不为0的元素中重复次数最多的，众数mode记录对应下标元素
+        if n % 2 == 0:
+            # 如n为偶数，则中位数median等于第n/2个元素加第n/2+1个元素的总和/2
+            t = n // 2
+            for i in range(lc):
+                t -= count[i]
+                if t < 0:
+                    # 如果t<0则说明需要找的两个中位数相同，（i + i） / 2 等同于 i
+                    median = round(i, 5)
+                    break
+                elif t == 0:
+                    # 如果t=0则说明第一个中位数是i，第二个中位数是紧接着i的下一个不为0的元素
+                    for x in range(i+1, lc):
+                        if count[x] > 0:
+                            median = round(((i+x)/2), 5)
+                            break
+                    break
+                else:
+                    continue
+        else:
+            # 如n为奇数，则中位数median等于第n/2+1个元素（也可认为是（n+1）/ 2个元素）
+            t = n // 2 + 1
+            for j in range(lc):
+                t -= count[j]
+                # 只要t<0或者t=0都说明找到了中间元素
+                if t <= 0:
+                    median = round(j, 5)
+                    break
+                else:
+                    continue
+        mean = round(sums/n, 5)
+        return [minimum, maximum, mean, median, mode]
+
+
+"""
+超出内存限制
+class Solution:
+    def sampleStats(self, count: List[int]) -> List[float]:
+        nums = []
+        for c in range(len(count)):
+            if count[c] == 0:
+                continue
+            else:
+                for n in range(count[c]):
+                    nums.append(c)
+        minimum = round(min(nums), 5)
+        maximum = round(max(nums), 5)
+        mean = round((sum(nums)/len(nums)), 5)
+        n = len(nums)
+        if n % 2 == 0:
+            t = n//2
+            median = round(((nums[t] + nums[t-1]) / 2), 5)
+        else:
+            t = n // 2
+            median = round(nums[t], 5)
+        mode = round(count.index(max(count)), 5)
+        return [minimum, maximum, mean, median, mode]
+"""
