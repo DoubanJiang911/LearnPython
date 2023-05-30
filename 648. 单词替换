@@ -1,6 +1,5 @@
 class Solution:
     def replaceWords(self, dictionary: List[str], sentence: str) -> str:
-        dictionary = sorted(dictionary.items(), key=lambda x: x[1])
         for idx, i in enumerate(dictionary):
             for j in dictionary:
                 if j == i[:len(j)]:
