@@ -1,0 +1,42 @@
+class Solution:
+    def kthPalindrome(self, queries: List[int], intLength: int) -> List[int]:
+        if intLength % 2 == 0:
+            flag = True
+        else:
+            flag = False
+        cnt = (intLength-1)//2
+        maxque = pow(10, cnt) * 9
+        n = maxque // 9
+        # print('queries[i]最大有效值是:', maxque)
+        res = []
+        for querie in queries:
+            if querie > maxque:
+                res.append(-1)
+            else:
+                temp = n + querie - 1
+                s = str(temp)
+                if flag:
+                    s += s[::-1]
+                else:
+                    # print(s,s[-2::-1])
+                    s += s[-2::-1]
+                # print('回文数：', s)
+                temp = int(s)
+                res.append(temp)
+        return res
+
+
+"""
+1.intLength等于1或2时，queries[i]最大有效值是9，queries[i]=9 or 99
+intLength等于3或4时，queries[i]最大有效值是90，queries[i]=999 or 9999
+...以此类推，max_queries[i] = 9*10n次方 for n in range(（intLength + 1） // 2)
+2.假如intLength等于3,前11个回文数分别是[101，111，121，...，191，202]
+假如intLength等于4,前11个回文数分别是[1001，1111，1221，...，1991，2002]
+假如intLength等于5,前11个回文数分别是[10001，10101，10201，...，10901，20002]
+总结规律，每十个数后回文数的首尾加一，如intLength是奇数则中间数依次加一，偶数则两个中间数同时加一
+3.根据回文数特性，单独观察前半部分
+[101，111，121，...，191，202] --> [10，11，12，...，19，20]
+[1001，1111，1221，...，1991，2002] --> [10，11，12，...，19，20]
+[10001，10101，10201，...，10901，20002] --> [100，101，102，...，109，200]
+可设置n依次加一，然后拼接后半部分，即可得出第n个回文数
+"""
