@@ -1,0 +1,17 @@
+class Solution:
+    def replaceWords(self, dictionary: List[str], sentence: str) -> str:
+        dictionary = sorted(dictionary.items(), key=lambda x: x[1])
+        for idx, i in enumerate(dictionary):
+            for j in dictionary:
+                if j == i[:len(j)]:
+                    dictionary[idx] = j
+        # 依次对比dictionary中的每个元素和其他元素，如i的前缀部分和j相同，则i被替换为j
+        s = sentence.split(' ')
+        # split通过空格字符，将sentence字符串中的每个单词分割为列表
+        for idy, a in enumerate(s):
+            for b in dictionary:
+                if b == a[:len(b)]:
+                    s[idy] = b
+        # 依次对比s中分割出的每个单词和dictionary清理后的元素，如找到前缀元素则进行替换
+        return ' '.join(s)
+        # 最后通过join将s记录的单词以空格连接，还原为字符串格式返回
