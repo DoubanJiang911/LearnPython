@@ -1,0 +1,42 @@
+class Solution:
+    def mostCompetitive(self, nums: List[int], k: int) -> List[int]:
+        stk = []
+        remove = len(nums)-k
+        for i in nums:
+            while remove and stk and stk[-1] > i:
+                stk.pop()
+                remove -= 1
+            stk.append(i)
+        return stk[:k]
+
+
+"""
+解题思路：单调栈
+1.当前元素大于等于栈顶元素，入栈；否则，将栈中大于当前元素的数一直出栈，再将当前元素压栈，以此保证栈中最小字典序的顺序。
+2.其中记录删除了多少元素，题目保留k个元素，即删除n-k个元素，若删除的数目达到上限，则保留栈中元素不再删除。
+3.遍历一遍后，若栈中元素数目大于k个（即n-k>0），将多余元素出栈。
+"""
+
+
+"""
+class Solution:
+    def mostCompetitive(self, nums: List[int], k: int) -> List[int]:
+        end = -k + 1
+        start = 0
+        ans = []
+        while end <= 0:
+            if end == 0:
+                m = min(nums[start:])
+            else:
+                m = min(nums[start:end])
+            i = nums.index(m, start)
+            ans.append(nums.pop(i))
+            end += 1
+            start = i
+        return ans
+
+
+思路：依次找到数组中的最小数值，接着从最小值下标开始搜索下一个最小数值，每次搜索需要在列表尾部预留k个数字，每找到一个数字后预留位数减一
+结果：超出时间限制，76 / 88 用例通过
+1 <= nums.length <= 105
+"""
