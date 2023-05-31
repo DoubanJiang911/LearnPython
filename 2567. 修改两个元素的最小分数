@@ -1,0 +1,17 @@
+class Solution:
+    def minimizeSum(self, nums: List[int]) -> int:
+        ans = []
+        temp = sorted(nums)
+        ans.append(temp[-1]-temp[2])
+        ans.append(temp[-3]-temp[0])
+        ans.append(temp[-2]-temp[1])
+        return min(ans)
+
+
+"""
+切换任意两个数字等于第三个数字，即可使最小得分等于0
+最大得分仅和列表中的最大值和最小值相关，三种缩短最大值到最小值间距的方案，取其中最小数字
+1.切换最小的两个数字等于第三小的数字，提高最小值两级
+2.切换最大的两个数字等于第三大的数字，降低最大值两级
+3.切换最大数字等于第二大的数字，切换最小数字等于第二小的数字，提升最小值一级同时降低最大值一级
+"""
