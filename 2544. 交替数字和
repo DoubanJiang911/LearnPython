@@ -1,0 +1,10 @@
+class Solution:
+    def alternateDigitSum(self, n: int) -> int:
+        flag = 1
+        sums = 0
+        while n > 0:
+            flag *= -1
+            temp = n % 10
+            n //= 10
+            sums += temp * flag
+        return flag * sums
