@@ -1,0 +1,81 @@
+class Solution:
+    def queensAttacktheKing(self, queens: List[List[int]], king: List[int]) -> List[List[int]]:
+        ans = []
+
+        # 左上方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while a > 0 and b > 0:
+            a -= 1
+            b -= 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        # 正上方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while a > 0:
+            a -= 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        # 右上方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while a > 0 and b < 7:
+            a -= 1
+            b += 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        # 正左方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while b > 0:
+            b -= 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        # 正右方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while b < 7:
+            b += 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        # 左下方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while a < 7 and b > 0:
+            a += 1
+            b -= 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        # 正下方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while a < 7:
+            a += 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        # 右下方方向寻找queen
+        a = king[0]
+        b = king[1]
+        while a < 7 and b < 7:
+            a += 1
+            b += 1
+            if [a, b] in queens:
+                ans.append([a, b])
+                break
+
+        return ans
