@@ -1,0 +1,9 @@
+class Solution:
+    def giveGem(self, gem: List[int], operations: List[List[int]]) -> int:
+        for i in range(len(operations)):
+            a = operations[i][0]
+            b = operations[i][1]
+            temp = gem[a] // 2
+            gem[a] -= temp
+            gem[b] += temp
+        return max(gem) - min(gem)
